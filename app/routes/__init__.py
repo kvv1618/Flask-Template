@@ -1,5 +1,7 @@
 from flask_restx import Api
 
+from .auth import api as auth_namespace
+
 api = Api(
     title="RedCarpet API",
     version="1.0",
@@ -14,3 +16,5 @@ api = Api(
         },
     },
 )
+
+api.add_namespace(auth_namespace)
