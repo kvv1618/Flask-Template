@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from email.policy import default
 
 import jwt
 from flask import request
@@ -57,3 +58,13 @@ class User(db.Model):
         
         return True, {"user": {"id": user.id, "username": user.username}}
         
+class TaxPayer(db.Model):
+    __tablename__ = "tax_payers"
+    id = db.Column(db.String(255), primary_key=True)
+    user_id= db.Column(db.String(255), db.ForeignKey('users.id'), nullable=False)
+    username= db.Column(db.String(255), server_default="",nullable=False)
+    tax_status= db.Column(db.Integer,server_default="0", nullable=False)
+    cgst= db.Column(db.Float, server_default="0", nullable=False)
+    sgst= db.Column(db.Float, server_default="0", nullable=False)
+    total_due= db.Column(db.String(255), server_default="",nullable=False)
+    due_date= db.Column(db.DateTime, server_default="",nullable=False)
