@@ -21,6 +21,15 @@ def get_tax_payer_details_parser():
     parser.add_argument('base_value_forGST', type=int, required=True, help='Base value cannot be blank', location='json')
     parser.add_argument('profit_forIncomeTax', type=int, required=True, help='Profit cannot be blank', location='json')
     parser.add_argument('state', type=str, required=True, help='State cannot be blank', location='json')
-    parser.add_argument('status', type=str, required=True, help='Status cannot be blank', location='json')
     parser.add_argument('due_date', type=str, required=True, help='Due date cannot be blank', location='json')
+    return parser
+
+def get_edited_detais_parser():
+    parser=reqparse.RequestParser()
+    parser.add_argument('username', type=str, required=True, help='Tax Payer ID cannot be blank', location='json')
+    parser.add_argument("due_amount", type=float, required=True, help='Due amount cannot be blank', location='json')
+    return parser
+def get_tax_status_parser():
+    parser=reqparse.RequestParser()
+    parser.add_argument('status', type=str, required=True, help='Status cannot be blank', location='json')
     return parser

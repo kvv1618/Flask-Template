@@ -54,7 +54,7 @@ def access_token_required(f):
         return f(*args, **kwargs)
     return decorated
 
-def adim_or_accountant_token_required(f):
+def admin_or_accountant_token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
         op_status, resp = User.get_loggedin_user()
@@ -66,3 +66,4 @@ def adim_or_accountant_token_required(f):
         if user.role not in [RoleEnum.ADMIN.value, RoleEnum.TAX_ACCOUNTANT.value]:
             return {"message": "You are not authorized to perform this action"}, 401
         return f(*args, **kwargs)
+    return decorated
