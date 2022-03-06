@@ -67,4 +67,6 @@ class TaxPayer(db.Model):
     cgst= db.Column(db.Float, server_default="0", nullable=False)
     sgst= db.Column(db.Float, server_default="0", nullable=False)
     total_due= db.Column(db.Float, server_default="",nullable=False)
+    date_modified=db.Column(db.DateTime, server_default="",nullable=False)
     due_date= db.Column(db.DateTime, server_default="",nullable=False)
+    user_date_created= db.Column(db.DateTime, db.ForeignKey('users.created_at'),server_default="", nullable=False)

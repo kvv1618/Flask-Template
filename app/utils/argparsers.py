@@ -33,3 +33,10 @@ def get_tax_status_parser():
     parser=reqparse.RequestParser()
     parser.add_argument('status', type=str, required=True, help='Status cannot be blank', location='json')
     return parser
+
+def get_filter_parser():
+    parser=reqparse.RequestParser()
+    parser.add_argument('date_created',type=bool, required=True, help='Date cannot be blank', location='json')
+    parser.add_argument('date_modified',type=bool, required=True, help='Date cannot be blank', location='json')
+    parser.add_argument('state_of_tax',type=str, required=True, help='State of tax cannot be blank', location='json')
+    return parser

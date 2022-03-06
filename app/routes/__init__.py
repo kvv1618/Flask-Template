@@ -2,6 +2,7 @@ from flask_restx import Api
 
 from .auth import api as auth_namespace
 from .tax_payers import api as tax_payers_namespace
+from .view_tax_payers import api as viewing_tax_payers_namespace
 
 api = Api(
     title="RedCarpet API",
@@ -20,3 +21,4 @@ api = Api(
 
 api.add_namespace(auth_namespace)
 api.add_namespace(tax_payers_namespace)
+api.add_namespace(viewing_tax_payers_namespace)

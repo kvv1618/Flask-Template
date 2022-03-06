@@ -55,6 +55,8 @@ class EditTaxPayer(Resource):
                 "sgst": sgst,
                 "total_due": total_tax,
                 "due_date": due_date,
+                "date_modified": datetime.now(),
+                "user_date_created": tax_payer.created_at,
             }
             db.session.add(TaxPayer(**new_tax_payer))
             db.session.commit()
@@ -88,6 +90,9 @@ class EditTaxDue(Resource):
             return {"message": "Tax payer not found"}, 404
         if tax_payer.total_due==0 and tax_payer.tax_status==taxEnum['PAID'].value:
             tax_payer.total_due=due_amount
+        else:
+            return {'message': "Tax is pending to be paid"}, 400
+        tax_payer.date_modified=datetime.now()
         db.session.commit()
         return {"message": "Tax payer updated"}, 200
 
@@ -104,6 +109,7 @@ class PayTax(Resource):
         tax_payer.tax_status=taxEnum[payload['status']].value
         if tax_payer.tax_status==taxEnum['PAID'].value:
             tax_payer.total_due=0
+        tax_payer.date_modified=datetime.now()
         db.session.commit()
         return {"message": "Congratulations on paying your tax"}, 200
         
